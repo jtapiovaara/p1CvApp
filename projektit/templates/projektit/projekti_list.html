@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block page_content %}
+
+<script>
+$(document).ready(function(){
+  $('[data-toggle="tooltip"]').tooltip();
+});
+</script>
+
+        <hr>
+<div class="row">
+{% load static %}
+    {% for proj in object_list %}
+        <div class="col-md-3">
+            <a href="{% url 'projektit:detail' proj.id %}" data-toggle="tooltip" title='{{ proj.shortdescription }}'>
+            <div class="card mb-2 shadow">
+                <img class="card-img-top" src="{% static 'images/' %}{{ proj.image }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ proj.title }}</h5>
+                </div>
+            </div>
+            </a>
+        </div>
+    {% endfor %}
+</div>
+
+<footer class="container-fluid text-center p-3 my-3 navbar-light bg-light">
+    <p>My Django Projects</p>
+</footer>
+
+{% endblock %}
