@@ -14,10 +14,7 @@ $(document).ready(function(){
         <div class="col-md-3">
             <a href="{% url 'projektit:detail' proj.id %}" data-toggle="tooltip" title='{{ proj.shortdescription }}'>
             <div class="card mb-2 shadow">
-                <img class="card-img-top" src="{% static 'images/' %}{{ proj.image }}">
-                <div class="card-body">
-                    <h5 class="card-title">{{ proj.title }}</h5>
-                </div>
+                <img class="card-img-top" src="{% static 'images/' %}{{ proj.app_image }}">
             </div>
             </a>
         </div>

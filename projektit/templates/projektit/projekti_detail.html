@@ -2,8 +2,8 @@
 {% block page_content %}
         {% load static %}
     <div>
+        <img  class="img-fluid" src="{% static 'images/' %}{{ projekti.app_image }}">
         <hr>
-        <h3> {{ projekti.title }}</h3>
         {% if projekti.id == 2 %}
             <a href="https://jtapiovaara.eu.pythonanywhere.com" target="_blank">Avaa R4C3 App</a>
         {% endif %}
@@ -12,6 +12,6 @@
         {% endif %}
         <hr>
         <p>{{ projekti.description }}</p>
-        <img  class="img-fluid" src="{% static 'images/' %}{{ projekti.image }}">
+
     </div>
 {% endblock %}
