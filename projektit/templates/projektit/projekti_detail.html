@@ -1,17 +1,15 @@
 {% extends 'base.html' %}	    
 {% block page_content %}
         {% load static %}
-    <div>
+    <div class="container">
         <img  class="img-fluid" src="{% static 'images/' %}{{ projekti.app_image }}">
         <hr>
         {% if projekti.id == 2 %}
-            <a href="https://jtapiovaara.eu.pythonanywhere.com" target="_blank">Avaa R4C3 App</a>
+            <a href="https://aatooseetrii.eu.pythonanywhere.com/aatooseetrii" target="_blank">Avaa R4C3 App</a>
         {% endif %}
         {% if projekti.id == 3 %}
             <a href="https://frozen-waters-29964.herokuapp.com/books" target="_blank">Avaa Books App</a>
         {% endif %}
-        <hr>
         <p>{{ projekti.description }}</p>
-
     </div>
 {% endblock %}

@@ -2,25 +2,61 @@
 {% block page_content %}
 
 <script>
-$(document).ready(function(){
-  $('[data-toggle="tooltip"]').tooltip();
-});
+$(document).ready(function(){$('[data-toggle="tooltip"]').tooltip();});
 </script>
-
-        <hr>
-<div class="row">
-{% load static %}
-    {% for proj in object_list %}
-        <div class="col-md-3">
-            <a href="{% url 'projektit:detail' proj.id %}" data-toggle="tooltip" title='{{ proj.shortdescription }}'>
-            <div class="card mb-2 shadow">
-                <img class="card-img-top" src="{% static 'images/' %}{{ proj.app_image }}">
+    <hr>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+	    <div class="container">
+	        <a class="navbar-brand" href= "{% url 'projektit:index' %}">Home</a>
+	        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+	          <span class="navbar-toggler-icon"></span>
+	        </button>
+	        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+	          <ul class="navbar-nav mr-auto">
+                  <li class="nav-item active">
+                      <a class="nav-link" href="#">My CV</a>
+                  </li>
+                  <li class="nav-item active">
+                      <a class="nav-link" href="#">My Project Description</a>
+                  </li>
+                  <li class="nav-item active">
+                      <a class="nav-link" href="#">My Code Sample</a>
+                  </li>
+                  <li class="nav-item active">
+                      <a class="nav-link" href="#">My Me Wondering</a>
+                  </li>
+                  <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">My SpinOffs</a>
+                      <div class="dropdown-menu">
+                          {% for item in view.spinoffs %}
+                              <a class="dropdown-item" href="#">{{ item.title }}</a>
+                          {% endfor %}
+                          <hr>
+                          {% for item in view.fullstacks %}
+                              <a class="dropdown-item" href="#">{{ item.title }}</a>
+                          {% endfor %}
+                      </div>
+                  <li class="nav-item active">
+                      <a class="nav-link" href="/pages/default">Other docs</a>
+                  </li>
+	          </ul>
+	        </div>
+	    </div>
+  </nav>
+<div class="container">
+    <div class="row">
+    {% load static %}
+        {% for proj in view.kahdeksan %}
+            <div class="col-md-3">
+                <a href="{% url 'projektit:detail' proj.id %}" data-toggle="tooltip" title='{{ proj.shortdescription }}'>
+                <div class="card mb-2 shadow">
+                    <img class="card-img-top" src="{% static 'images/' %}{{ proj.app_image }}">
+                </div>
+                </a>
             </div>
-            </a>
-        </div>
-    {% endfor %}
+        {% endfor %}
+    </div>
 </div>
-
 <footer class="container-fluid text-center p-3 my-3 navbar-light bg-light">
     <p>My Django Projects</p>
 </footer>
