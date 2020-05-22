@@ -7,6 +7,7 @@ $(document).ready(function(){$('[data-toggle="tooltip"]').tooltip();});
     <hr>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
 	    <div class="container">
+          {% load static %}
 	        <a class="navbar-brand" href= "{% url 'projektit:index' %}">Home</a>
 	        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 	          <span class="navbar-toggler-icon"></span>
@@ -14,19 +15,19 @@ $(document).ready(function(){$('[data-toggle="tooltip"]').tooltip();});
 	        <div class="collapse navbar-collapse" id="navbarSupportedContent">
 	          <ul class="navbar-nav mr-auto">
                   <li class="nav-item active">
-                      <a class="nav-link" href="#">My CV</a>
+                      <a class="nav-link" href="{% static "docs/JTapiovaara_CV_2020.pdf" %}">My CV before Django |</a>
                   </li>
                   <li class="nav-item active">
-                      <a class="nav-link" href="#">My Project Description</a>
+                      <a class="nav-link" href="{% static "docs/20200121_django_projektit_kuvaus.pdf" %}">My Project Description |</a>
                   </li>
                   <li class="nav-item active">
-                      <a class="nav-link" href="#">My Code Sample</a>
+                      <a class="nav-link" href="{% static "docs/20200505_django_projektit_views.pdf" %}">My Code Sample |</a>
                   </li>
                   <li class="nav-item active">
-                      <a class="nav-link" href="#">My Me Wondering</a>
+                      <a class="nav-link" href="{% static "docs/Django_generic_views_it_is_this_easy.pdf" %}">My Me Wondering |</a>
                   </li>
                   <li class="nav-item dropdown">
-                      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">My SpinOffs</a>
+                      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown"> My SpinOffs</a>
                       <div class="dropdown-menu">
                           {% for item in view.spinoffs %}
                               <a class="dropdown-item" href="#">{{ item.title }}</a>
@@ -37,7 +38,7 @@ $(document).ready(function(){$('[data-toggle="tooltip"]').tooltip();});
                           {% endfor %}
                       </div>
                   <li class="nav-item active">
-                      <a class="nav-link" href="/pages/default">Other docs</a>
+                      <a class="nav-link" href="/pages/default"> | Other docs</a>
                   </li>
 	          </ul>
 	        </div>
