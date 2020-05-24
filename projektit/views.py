@@ -22,8 +22,8 @@ class IndexView(generic.ListView):
     def spinoffs(self):
         return Projekti.objects.filter(projtype='s').order_by('title')
 
-    def fullstacks(selfself):
-        return Projekti.objects.filter(projtype='j')
+    def fullstacks(self):
+        return Projekti.objects.filter(projtype='j').order_by('title')
 
 
 class DetailView(generic.DetailView):

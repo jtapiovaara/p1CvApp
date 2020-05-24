@@ -3,8 +3,15 @@ from django.contrib.flatpages.admin import FlatPageAdmin
 from django.contrib.flatpages.models import FlatPage
 from django.utils.translation import gettext_lazy as _
 
-
 from .models import Projekti
+
+
+class ProjektiAdmin(admin.ModelAdmin):
+    list_display = ['title', 'projtype']
+    list_filter = ('projtype',)
+    radio_fields = {'projtype': admin.HORIZONTAL}
+    search_fields = ['title', 'description']
+
 
 
 class FlatPageAdmin(FlatPageAdmin):
@@ -21,6 +28,6 @@ class FlatPageAdmin(FlatPageAdmin):
     )
 
 
-admin.site.register(Projekti)
+admin.site.register(Projekti, ProjektiAdmin)
 admin.site.unregister(FlatPage)
 admin.site.register(FlatPage, FlatPageAdmin)

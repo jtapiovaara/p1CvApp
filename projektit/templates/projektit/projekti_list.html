@@ -30,11 +30,11 @@ $(document).ready(function(){$('[data-toggle="tooltip"]').tooltip();});
                       <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown"> My SpinOffs</a>
                       <div class="dropdown-menu">
                           {% for item in view.spinoffs %}
-                              <a class="dropdown-item" href="{% static "docs/" %}{{ item.title }}.png">{{ item.title }}</a>
+                              <a class="dropdown-item" href="{% static "docs/" %}{{ item.image }}">{{ item.title }}</a>
                           {% endfor %}
                           <hr>
                           {% for item in view.fullstacks %}
-                              <a class="dropdown-item" href="{% static "docs/" %}{{ item.title }}.png">{{ item.title }}</a>
+                              <a class="dropdown-item" href="{% static "docs/" %}{{ item.image }}">{{ item.title }}</a>
                           {% endfor %}
                       </div>
                   <li class="nav-item active">
