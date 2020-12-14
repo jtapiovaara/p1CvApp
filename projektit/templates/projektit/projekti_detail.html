@@ -2,13 +2,16 @@
 {% block page_content %}
         {% load static %}
     <div class="container">
-        <img  class="img-fluid" src="{% static 'images/' %}{{ projekti.app_image }}">
+        <img  class="img-fluid" src="{% static 'images/' %}{{ projekti.image }}">
         <hr>
         {% if projekti.id == 2 %}
             <a href="https://aatooseetrii.eu.pythonanywhere.com/aatooseetrii" target="_blank">Avaa R4C3 App</a>
         {% endif %}
         {% if projekti.id == 3 %}
             <a href="https://frozen-waters-29964.herokuapp.com/books" target="_blank">Avaa Books App</a>
+        {% endif %}
+        {% if projekti.id == 5 %}
+            <a href="https://drive.google.com/file/d/1HSiHlh9x1ebc0o_IehTIqo_NzHbP7VZw/view?usp=sharing" target="_blank">Avaa blogi eKirjana</a>
         {% endif %}
         <p>{{ projekti.description }}</p>
     </div>

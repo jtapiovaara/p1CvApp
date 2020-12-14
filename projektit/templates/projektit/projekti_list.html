@@ -18,7 +18,7 @@ $(document).ready(function(){$('[data-toggle="tooltip"]').tooltip();});
                       <a class="nav-link" href="{% static "docs/JTapiovaara_CV_2020.pdf" %}">My CV before Django |</a>
                   </li>
                   <li class="nav-item active">
-                      <a class="nav-link" href="{% static "docs/20200520_django_projektit_kuvaus.pdf" %}">Project Description |</a>
+                      <a class="nav-link" href="{% static "docs/20201117_django_projektit_kuvaus.pdf" %}">Project Description |</a>
                   </li>
                   <li class="nav-item active">
                       <a class="nav-link" href="{% static "docs/20200505_django_projektit_views.pdf" %}">Code Sample |</a>
@@ -34,6 +34,10 @@ $(document).ready(function(){$('[data-toggle="tooltip"]').tooltip();});
                           {% endfor %}
                           <hr>
                           {% for item in view.fullstacks %}
+                              <a class="dropdown-item" href="{% static "docs/" %}{{ item.image }}">{{ item.title }}</a>
+                          {% endfor %}
+                          <hr>
+                          {% for item in view.thonny %}
                               <a class="dropdown-item" href="{% static "docs/" %}{{ item.image }}">{{ item.title }}</a>
                           {% endfor %}
                       </div>

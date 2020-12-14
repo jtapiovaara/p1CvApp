@@ -9,6 +9,7 @@ class Projekti(models.Model):
         ('p', 'Pääprojekti'),
         ('s', 'SpinOff - Django'),
         ('j', 'SpinOff - JS'),
+        ('t', 'SpinOff - thonny'),
     ]
     title = models.CharField(max_length=32, blank=True)
     projtype = models.CharField(max_length=1, blank=True, choices=PROJTYPE_CHOICES)

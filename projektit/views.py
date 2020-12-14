@@ -25,6 +25,9 @@ class IndexView(generic.ListView):
     def fullstacks(self):
         return Projekti.objects.filter(projtype='j').order_by('title')
 
+    def thonny(self):
+        return Projekti.objects.filter(projtype='t').order_by('title')
+
 
 class DetailView(generic.DetailView):
     """

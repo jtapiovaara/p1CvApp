@@ -27,9 +27,9 @@
           {% for page in flatpages %}
             <li><a href="{{ page.url }}">{{ page.title }}</a></li>
           {% endfor %}
-{#        {% get_flatpages '/greatestspeech/' for someuser as about_pages %}#}
+        {% get_flatpages '/greatestspeech/' for someuser as about_pages %}
         </ul>
-    </div>
+  </div>
 </body>
 <footer class="container-fluid text-center p-3 my-3 navbar-light bg-light">JTapiovaara 2020</footer>
 </html>

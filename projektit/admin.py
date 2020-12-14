@@ -7,11 +7,10 @@ from .models import Projekti
 
 
 class ProjektiAdmin(admin.ModelAdmin):
-    list_display = ['title', 'projtype']
+    list_display = ['title', 'projtype', 'app_image']
     list_filter = ('projtype',)
     radio_fields = {'projtype': admin.HORIZONTAL}
     search_fields = ['title', 'description']
-
 
 
 class FlatPageAdmin(FlatPageAdmin):
