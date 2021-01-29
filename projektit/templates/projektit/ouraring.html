@@ -1,56 +1,160 @@
 {% extends 'base.html' %}
 {% block page_content %}
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
           integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
 {% load static %}
+    <script>
+        historia=()=> {
+            document.getElementById('kouluTodistus').style.display='none'
+            document.getElementById('todistusHistoria').style.display='block'
+        }
+        perus=()=> {
+            document.getElementById('todistusHistoria').style.display='none'
+            document.getElementById('kouluTodistus').style.display='block'
+        }
+        aktiivisuushistoria=()=> {
+            document.getElementById('aktiivisuus').style.display='none'
+            document.getElementById('aktiivisuusHistoria').style.display='block'
+        }
+        aktiivisuus=()=> {
+            document.getElementById('aktiivisuusHistoria').style.display='none'
+            document.getElementById('aktiivisuus').style.display='block'
+        }
+    </script>
     <style>
         body {
             background-image: url("{% static "images/ouraring.jpg" %}");
             background-size: 35%;
             background-repeat: repeat-x;
         }
-    h4 {
-        font-size:3vw
-    }
+        h4 {
+            font-size:3vw
+        }
+        #kouluTodistus {
+            height: 250px;
+        }
+        #todistusHistoria {
+            height: 250px;
+        }
+        #aktiivisuus {
+            height: 250px;
+        }
+        #aktiivisuusHistoria {
+            height: 250px;
+        }
 </style>
 
 <div class="container" style="opacity: 0.7">
-    <h3 style="font-size:4vw; text-align: center; margin-top: 137px"><b>my Advanced Oura Ring page</b></h3>
+    <h3 style="font-size:4vw; text-align: center; margin-top: 138px"><b>my Advanced OURA Ring page</b></h3>
     <div class="card shadow" style="padding: 20px">
         <h4>How did I sleep? Syvän unen määrä, Min</h4>
-                <h1 style="font-size: xxx-large; text-align: center"><b>{{ context.sleepdata }} </b></h1>
+        <h1 style="font-size: xxx-large; text-align: center"><b>{{ context.deepsleepamount }} </b></h1>
+            <h4 style="text-align: center"><b>{{ context.deepsleeppercentage }}% unimäärästä{{ context.sleepstory }}</b></h4>
     </div>
-    <div class="card shadow" style="padding: 20px">
+
+    <div id="kouluTodistus" class="card shadow w3-animate-left"
+         style="padding: 20px" onclick="historia()">
         <h4>Am I ready? Koulutodistus.</h4>
         <h1 style="font-size: xxx-large; text-align: center"><b>{{ context.readydata }}</b></h1>
         {% if context.valmiusero > 0 %}
-                <p style="color: green; font-size: xx-large; text-align: center">
+                <h2 lass="fa" style="color: green; text-align: center">
                     <b>Hyvin menee! Parempi vireys kuin eilen.</b>
-                    <small><button style="border-radius: 50%; background-color: green">{{ context.valmiusero }}</button></small></p>
+                    <small><button style="border-radius: 50%; background-color: green">{{ context.valmiusero }}</button></small></h2>
         {% else %}
-                <p style="color: crimson; font-size: xx-large; text-align: center">
-                    <b>Tsemppiä päivään, eilen oli vähän parempi vireyslähtö.</b>
-                    <small><button style="border-radius: 50%; background-color: crimson">{{ context.valmiusero }}</button></small></p>
+                <h2 class="fa" style="color: crimson; text-align: center">
+                    <b>Tsemppiä päivään, eilen olit vireämpi.</b>
+                    <small><button style="border-radius: 50%; background-color: crimson">{{ context.valmiusero }}</button></small></h2>
         {% endif %}
     </div>
-    <div class="card" style="padding: 20px">
+    <div id="todistusHistoria" class="card shadow w3-animate-right"
+         style="padding: 20px; display: none" onclick="perus()">
+        <h4>Seitsemän päivää valmiustilaa.</h4>
+        <canvas id="myReadiness" style="padding: 10px">
+            <script>
+            let i = 1
+            let config2 = {
+              type: 'bar',
+              data: {
+                datasets: [{
+                  data: [
+                      {% for item in context.readydatahistory %}
+                      {{ item.score }},
+                      {% endfor %}
+                  ],
+                  label: 'My latest readenisesses (7 days)'
+                }],
+                labels: ['','','','','','','']
+              },
+              options: {
+                  responsive: true,
+                  legend: {
+                      labels: {
+                          fontFamily: "'PoliteType', 'Arial'"
+                      }
+                  },
+              }
+            };
+            let ctx1 = document.getElementById('myReadiness').getContext('2d');
+            let myReadiness = new Chart(ctx1, config2);
+            </script>
+        </canvas>
+    </div>
+
+    <div id="aktiivisuus" class="card shadow w3-animate-left"
+         style="padding: 20px; display: block" onclick="aktiivisuushistoria()">
         <h4>Am I active? Eilen ja tänään kävellyt kilsat</h4>
         {% if context.plusmiinus > 0 %}
-            <i class="fa fa-heart" style="color: crimson; font-size: xx-large; text-align: center">
-                <p style="color: green">Hyvin menee! Olet liikkunut enemmän kuin eilen.</p></i>
+            <h2 class="fa fa-heart" style="color: crimson; text-align: center"><br>
+                <b style="color: green; text-align: center">
+                    Hyvin menee! Olet liikkunut enemmän kuin eilen.</b></h2>
         {% else %}
-            <i class="fa fa-thumbs-down" style="color: darkblue; font-size: xx-large; text-align: center">
-                <p>Olet liikkunut vähemmän kuin eilen, pystyt parempaan, liikkeelle siitä!</p></i>
+            <h2 class="fa fa-thumbs-down" style="color: darkblue; text-align: center"><br>
+                <b style="color: darkblue">
+                    Olet liikkunut vähemmän kuin eilen, pystyt parempaan, liikkeelle siitä!</b></h2>
         {% endif %}
-        <p style="text-align: center"><small>{{ context.steps }} askelta tänään</small></p>
+        <h4 style="text-align: center"><small>{{ context.steps }} askelta tänään</small></h4>
     </div>
+    <div id="aktiivisuusHistoria" class="card shadow w3-animate-right"
+         style="padding: 20px; display: none" onclick="aktiivisuus()">
+        <h4>Seitsemän päivää aktiivisuutta</h4>
+        <canvas id="myActivityness" style="padding: 10px">
+            <script>
+            let config3 = {
+              type: 'bar',
+              data: {
+                datasets: [{
+                  data: [
+                      {% for jalka in context.stepsit %}
+                          {{ jalka.steps }},
+                      {% endfor %}
+                  ],
+                  label: 'My latest activitynesses (7 days)'
+                }],
+                labels: ['','','','','','','']
+              },
+              options: {
+                  responsive: true,
+                  legend: {
+                      labels: {
+                          fontFamily: "'PoliteType', 'Arial'"
+                      }
+                  },
+              }
+            };
+            let ctx3 = document.getElementById('myActivityness').getContext('2d');
+            let myActivityness = new Chart(ctx3, config3);
+            </script>
+        </canvas>
+    </div>
+
     <div class="card shadow" style="padding: 20px">
         <h4>BMI</h4>
         <h1 style="font-size: xxx-large; text-align: center"><b>{{ context.bmi }}</b></h1>
         <canvas id="myMoves" style="padding: 10px">
             <script>
-            var config = {
+            let config1 = {
               type: 'line',
               data: {
                 datasets: [{
@@ -59,30 +163,52 @@
                       {{ a }},
                       {% endfor %}
                   ],
-                  label: 'My latest moves'
+                  label: 'My latest moves (2h)'
                 }],
                 labels: ['','','','','','','','','','','','','','','','','','','','','','','','']
               },
               options: {
-                responsive: true
+                  responsive: true,
+                  legend: {
+                      labels: {
+                          fontFamily: "'PoliteType', 'Arial'"
+                      }
+                  },
+                  scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true,
+                            max: 5
+                        }
+                    }]
+                  },
+                  elements: {
+                      point: {
+                          pointStyle: 'circle',
+                          radius: 3
+                      },
+                      line: {
+                          backgroundColor: 'rgba(50, 200, 100, 0.1)'
+                      }
+                  }
               }
             };
-            window.onload = function() {
-              var ctx = document.getElementById('myMoves').getContext('2d');
-              window.myPie = new Chart(ctx, config);
-            };
+            let ctx2 = document.getElementById('myMoves').getContext('2d');
+            let myMoves = new Chart(ctx2, config1);
             </script>
         </canvas>
     </div>
     <div class="card shadow" style="padding: 20px">
         <h4>Milloin on oikea aika unille?</h4>
-        <p style="text-align: center">Oura vastaa: {{ context.nukkumaan }}</p>
+        <h4 style="text-align: center"><b>Oura ehdottaa: {{ context.nukkumaanko }}</b></h4>
         {% if context.unille == None %}
 
         {% else %}
-            <h3 style="font-size: x-large; text-align: center"><b>Viimeistään {{ context.tyynyaika }} nukkumaan</b></h3>
+            <h2 style="text-align: center"><b>Viimeistään {{ context.pillowtime }} nukkumaan</b></h2>
         {% endif %}
     </div>
+    <w3-button><a href="{% url 'projektit:index' %}" class="btn btn-default btn-sm">Poistu</a></w3-button>
+    <w3-button><a href="{% url 'projektit:logout' %}" class="btn btn-default btn-sm">Logout & Poistu</a></w3-button>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
